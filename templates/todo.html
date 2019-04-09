@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+input.content {
+	width: 300px;
+	height: 25px;
+	border: 1px solid #ef5f5f;
+	border-radius: 3px;
+	outline: none;
+	margin-right: 20px;
+	padding: 0 10px;
+	color: inherit;
+	font-family: inherit;
+}
+
+input[value="add"] {
+	background-color: #fff;
+	color: #ff5f5f;
+}
+
+input[value="add"]:hover {
+	background-color: #ffefef;
+}
+
+.count {
+	width: 580px;
+	margin: 10px auto;
+	font-family: arial;
+}
+
+ul.todo-list {
+	max-width: 580px;
+	min-width: 300px;
+	margin: 10px auto;
+}
+
+ul.todo-list li.todo-item {
+	display: inline-block;
+	width: 100%;
+
+	border: 1px solid black;
+	margin: 0 5px 20px;
+	position: relative;
+	box-shadow: 1px 3px 8px 0 rgba(0,0,0,0.30);
+	background-color: #efafaf;
+	border: 1px solid transparent;
+	border-radius: 5px;
+}
+
+ul.todo-list li.todo-item:hover {
+	background-color: #ef7f7f;
+	transition: 0.3s;
+} 
+
+
+ul.todo-list li.todo-item .iscomplete,
+ul.todo-list li.todo-item .created_time,
+ul.todo-list li.todo-item .updated_time,
+ul.todo-list li.todo-item .edit,
+ul.todo-list li.todo-item .delete {
+	position: absolute;
+}
+
+ul.todo-list li.todo-item .iscomplete {
+	width: 20px;
+	height: 20px;
+	left: 20px;
+	top: 50%;
+	margin-top: -10px;
+	cursor: pointer;
+}
+
+ul.todo-list li.todo-item .content {
+	width: 350px;
+	font-size: 20px;
+	margin: 10px 0 10px 60px;
+	padding: 10px;
+	border: 1px solid #ffdfdf;
+	background-color: #ffdfdf;
+	border-radius: 3px;
+}
+
+ul.todo-list li.todo-item:hover .content {
+	border: 1px solid #ffbfbf;
+	background-color: #ffbfbf;
+	transition: 0.3s;
+}
+
+
+ul.todo-list li.todo-item .created_time {]
+	font-size: 10px;
+	font-family: arial;
+	color: #555;
+	right: 5px;
+	bottom: 15px;
+}
+
+ul.todo-list li.todo-item .updated_time {
+	font-size: 10px;
+	font-family: arial;
+	color: #555;
+	right: 10px;
+	bottom: 5px;
+}
+
+ul li .edit {
+	width: 30px;
+	height: 30px;
+	right: 60px;
+	top: 10%;
+	border-radius: 25px;
+	overflow: hidden;
+	background-color: #ff5f5f;
+	text-align: center;
+	line-height: 30px;
+	font-size: 15px;
+	font-family: arial;
+	font-weight: 700;
+	color: #fff;
+	box-shadow: 1px 1px 0 0 rgba(0,0,0,0.2);
+}
+
+ul li .delete {
+	border: 1px solid #ff5f5f;
+	width: 30px;
+	height: 30px;
+	right: 20px;
+	top: 10%;
+	border-radius: 25px;
+	overflow: hidden;
+	background-color: #ff5f5f;
+	text-align: center;
+	line-height: 30px;
+	font-size: 24px;
+	font-family: arial;
+	color: #fff;
+	outline: none;
+	box-shadow: 1px 1px 0 0 rgba(0,0,0,0.2);
+	cursor: pointer;
+}
+
+ul li .edit:hover,
+ul li .delete:hover {
+	background-color: #ff4f4f;
+	transition: 0.2s;
+}
+
+
+</style>
+{% endblock %}
+
+{% block header %}
+<form action="/todos" method="post">
+	<input type="text" name="content" class="content">
+	<input type="submit" name="submit" value="add" class="btn">
+	<!-- <input type=""> -->
+</form>
+{% endblock%}
+
+{% block main %}
+<div class="count">
+	{{ todo_list|length }} todos.
+</div>
+<ul class="todo-list">
+	{% for item in todo_list: %}
+	<li class="todo-item">
+		<div>
+			<input class="iscomplete" type="checkbox" name="iscomplete">
+		</div>
+
+		<div class="content">{{ item["content"] }}</div>
+
+<!-- 		<div class="created_time">created time: {{ item["created_time"] }}</div> -->
+
+		<div class="updated_time">{{ item["updated_time"] }}</div>
+
+		<a class="edit" href="/todos/update/{{ item['_id'] }}">E</a>
+
+		<form action="/todos/delete/{{ item['_id'] }}" method="post">
+			<input class="delete" type="submit" name="delete" value="×">
+		</form>
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}
+

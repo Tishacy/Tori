@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Tori, A todo list app</title>
+	<style>
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+html, body {
+	font-size: 14px;
+	font-family: Georgia, arial, sans-serif;
+	color: #3f3f3f;
+}
+
+a {
+	color: inherit;
+}
+
+.todoapp {
+	/*max-width: 580px;*/
+	min-width: 300px;
+	margin: auto;
+}
+
+header {
+	width: 100%;
+	height: 200px;
+	margin: 0 auto;
+	padding-top: 20px;
+	text-align: center;
+	background-color: #ef5f5f;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.32);
+}
+
+header h1 {
+	font-size: 60px;
+	width: 250px;
+	margin: 30px auto 10px;
+}
+
+header p {
+	margin: 10px auto 20px;
+	color: #555;
+}
+
+footer {
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 8px;
+}
+
+.btn {
+	padding: 5px 20px;
+	border: 1px solid #ef5f5f;
+	border-radius: 3px;
+	background-color: #ff5f5f;
+	color: #fff;
+	box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.30);
+	cursor: pointer;
+}
+
+.btn:hover {
+	background-color: #ff4f4f;
+}
+
+	</style>
+	{% block head %}
+	{% endblock %}
+</head>
+<body>
+	<div class="todoapp">
+		<header>
+			<h1>
+				<a href="{{ url_for('show_todos') }}">Tori</a>
+			</h1>
+			<p>Manage your todo list</p>
+			{% block header %}
+			{% endblock %}
+		</header>
+
+		<section class="main">
+			{% block main %}
+			{% endblock %}
+		</section>
+
+		<footer>
+			<span>&copy; 2019</span>
+			<a href="https://github.com/Tishacy" target="_blank">Tishacy @ Github</a>
+		</footer>
+</body>
+</html>
