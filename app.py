@@ -32,12 +32,11 @@ def new_todo():
         "content": request.form['content'],
         "created_time": format_time,
         "updated_time": format_time
-        # "rank": 
     }
     collec.insert_one(content)
     return redirect(url_for('show_todos'))
 
-# Delte a todo item
+# Delete a todo item
 @app.route('/todos/delete/<string:todo_id>', methods=['POST'])
 def delete_todo(todo_id):
     collec.delete_one({'_id': ObjectId(todo_id)})
@@ -61,4 +60,3 @@ def update_todo(todo_id):
     elif request.method == "GET":
         item = collec.find_one({'_id': ObjectId(todo_id)})
         return render_template('edit.html', item=item)
-
