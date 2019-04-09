@@ -1,5 +1,9 @@
-<img src="./static/images/main.png">
-<p style="text-align: center; font-style: italic;">A simple todo-list app build with flask and mongodb.</p>
+<p align="center">
+  <img src="./static/images/main.png">
+</p>
+<p align="center">
+  <i>A simple todo-list app build with flask and mongodb.</i>
+</p>
 
 ## Install
 1. Ensure that mongodb is installed.
