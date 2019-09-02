@@ -60,3 +60,5 @@ def update_todo(todo_id):
     elif request.method == "GET":
         item = collec.find_one({'_id': ObjectId(todo_id)})
         return render_template('edit.html', item=item)
+
+app.run(host="0.0.0.0")
